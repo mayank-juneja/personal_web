@@ -1,66 +1,382 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mayank Juneja</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayank Juneja</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #666;
+            --background-color: #fff;
+            --link-color: #0066cc;
+            --hover-color: #003366;
+            --card-bg: #f5f5f5;
+            --timeline-line: #ddd;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #e0e0e0;
+            --secondary-color: #b0b0b0;
+            --background-color: #1a1a1a;
+            --link-color: #66b3ff;
+            --hover-color: #99ccff;
+            --card-bg: #2d2d2d;
+            --timeline-line: #444;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Calibri, 'Segoe UI', 'Trebuchet MS', sans-serif;
+            line-height: 1.6;
+            color: var(--primary-color);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--background-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .header {
+            margin-bottom: 4rem;
+        }
+
+        .profile-container {
+            display: flex;
+            gap: 2rem;
+            align-items: center; /* Ensures proper vertical alignment */
+        }
+
+
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--card-bg);
+        }
+
+        .profile-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .profile-content h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .bio {
+            color: var(--secondary-color);
+            font-size: 1.1em;
+            margin: 0.5rem 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .social-link {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            color: var(--link-color);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            border: none;
+            background: var(--card-bg);
+            color: var(--primary-color);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .timeline {
+            position: relative;
+            margin-left: 7rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--timeline-line);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-year {
+            position: absolute;
+            left: -7rem;
+            top: 0;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .timeline-bullet {
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: var(--link-color);
+            border: 2px solid var(--background-color);
+        }
+
+        .company-logo, .university-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-right: 1rem;
+        }
+
+        .experience-content, .education-content {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 1px solid var(--timeline-line);
+            padding-bottom: 0.3em;
+            margin-bottom: 1.5em;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-thumbnail {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .writing-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .writing-item .title {
+            font-weight: 600;
+            color: var(--link-color);
+        }
+
+        .misc-content {
+            display: grid;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+                align-items: center; /* Centers items in the column layout */
+                text-align: center; /* Centers text for better readability */
+            }
+        }
+
+
+            .profile-photo {
+                margin: 0 auto;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .timeline {
+                margin-left: 3rem;
+            }
+
+            .timeline-year {
+                left: -3rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Mayank Juneja</h1>
-    <p>Product Manager</p>
-  </header>
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+    </button>
 
-  <nav>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#talks">Featured Talks</a></li>
-      <li><a href="#teaching">Teaching</a></li>
-    </ul>
-  </nav>
+    <div class="header">
+        <div class="profile-container">
+            <img src="assets/mj.png" alt="Mayank Juneja" class="profile-photo">
+            <div class="profile-content">
+                <h1>Mayank Juneja</h1>
+                <div class="bio">
+                  Product Leader and Industry Expert in AI/ML Applications, cybersecurity, Cloud and Edge Computing, and DevOps Tooling. Experience in driving zero-to-one product strategy, go-to-market planning, and launch of multi million dollar customer-facing products, and AI platform and tools. Experience leading large product and engineering teams, and working with infrastructure and AI technologies such as computer vision, Deep Learning, reinforcement learning, and prompt engineering.
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/yourusername" class="social-link" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/yourusername" class="social-link" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://twitter.com/yourusername" class="social-link" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://yourusername.substack.com" class="social-link" title="Substack">
+                        <i class="fas fa-newspaper"></i>
+                    </a>
+                    <a href="mailto:your.email@example.com" class="social-link" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <main>
-    <section id="about">
-      <h2>About</h2>
-      <p>Brief biography goes here.</p>
-    </section>
+    <div class="section" id="experience">
+        <h2>Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">2022</div>
+                <div class="timeline-bullet"></div>
+                <div class="experience-content">
+                    <img src="/api/placeholder/50/50" alt="Company Logo" class="company-logo">
+                    <div class="content">
+                        <span class="title">Senior Software Engineer - Company Name</span>
+                        <p class="description">Led development of key features that improved system performance by X%. Collaborated with cross-functional teams to deliver Y.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2019</div>
+                <div class="timeline-bullet"></div>
+                <div class="experience-content">
+                    <img src="/api/placeholder/50/50" alt="Previous Company Logo" class="company-logo">
+                    <div class="content">
+                        <span class="title">Software Engineer - Previous Company</span>
+                        <p class="description">Developed and maintained critical infrastructure serving millions of users. Implemented new architecture that reduced costs by Z%.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <section id="experience">
-      <h2>Experience</h2>
-      <ul>
-        <li>
-          <h3>Role at Company</h3>
-          <p>Duration</p>
-          <p>Brief description of your role and achievements.</p>
-        </li>
-        <!-- Repeat for other experiences -->
-      </ul>
-    </section>
+    <div class="section" id="education">
+        <h2>Education</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">2015</div>
+                <div class="timeline-bullet"></div>
+                <div class="education-content">
+                    <img src="/api/placeholder/50/50" alt="University Logo" class="university-logo">
+                    <div class="content">
+                        <span class="title">MS in Computer Science - University Name</span>
+                        <p class="description">Focus on machine learning and distributed systems. Published X papers in top conferences.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <section id="talks">
-      <h2>Featured Talks</h2>
-      <ul>
-        <li><a href="link_to_talk" target="_blank">Talk Title</a></li>
-        <!-- Repeat for other talks -->
-      </ul>
-    </section>
+    <div class="section" id="writing">
+        <h2>Writing</h2>
+        <div class="writing-item">
+            <span class="year">2024</span>
+            <a href="#" class="title">Building Scalable Systems: Lessons Learned</a>
+            <p class="description">An in-depth look at architecture decisions and trade-offs in building large-scale systems.</p>
+        </div>
+        <div class="writing-item">
+            <span class="year">2023</span>
+            <a href="#" class="title">The Future of AI in Software Development</a>
+            <p class="description">Exploring how AI is transforming the way we write and maintain code.</p>
+        </div>
+    </div>
 
-    <section id="teaching">
-      <h2>Teaching</h2>
-      <p>Information about courses taught or educational content.</p>
-    </section>
-  </main>
+    <div class="section" id="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="/api/placeholder/250/150" alt="Project 1" class="project-thumbnail">
+                <h3>Project Name</h3>
+                <p>Description of the project, its impact, and technologies used.</p>
+                <a href="#" class="project-link">Learn More →</a>
+            </div>
+            <div class="project-card">
+                <img src="/api/placeholder/250/150" alt="Project 2" class="project-thumbnail">
+                <h3>Another Project</h3>
+                <p>Description of another interesting project you've worked on.</p>
+                <a href="#" class="project-link">Learn More →</a>
+            </div>
+        </div>
+    </div>
 
-  <footer>
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
-    <p>Contact: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-    <p>
-      <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> |
-      <a href="https://github.com/yourusername" target="_blank">GitHub</a> |
-      <a href="https://youtube.com/yourchannel" target="_blank">YouTube</a>
-    </p>
-  </footer>
+    <div class="section" id="misc">
+        <h2>Miscellaneous</h2>
+        <div class="misc-content">
+            <p>🎤 <strong>Speaking:</strong> I regularly speak at conferences about software architecture and AI. Recent talks include "Building Resilient Systems" at TechConf 2024.</p>
+            <p>📚 <strong>Reading:</strong> Currently reading "Designing Data-Intensive Applications" and "The Psychology of Money".</p>
+            <p>🎨 <strong>Side Projects:</strong> Building an open-source tool for developers. Contributing to various OSS projects in my spare time.</p>
+            <p>🎮 <strong>Hobbies:</strong> Amateur photographer, occasional game developer, and avid hiker.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            
+            const themeToggle = document.querySelector('.theme-toggle i');
+            themeToggle.className = newTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+    </script>
 </body>
 </html>
